@@ -8,5 +8,5 @@
 
 
 fn main() {
-    println!("Hello world!");qui
+    println!("Hello world!");
 }
