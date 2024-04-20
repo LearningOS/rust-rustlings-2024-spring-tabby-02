@@ -3,13 +3,13 @@
 	This question requires you to use a stack to achieve a bracket match
 */
 
-// I AM NOT DONE
+
 #[derive(Debug)]
 struct Stack<T> {
 	size: usize,
 	data: Vec<T>,
 }
-impl<T> Stack<T> {
+impl<T:Clone> Stack<T> {
 	fn new() -> Self {
 		Self {
 			size: 0,
@@ -32,7 +32,16 @@ impl<T> Stack<T> {
 	}
 	fn pop(&mut self) -> Option<T> {
 		// TODO
-		None
+
+		if self.data.is_empty(){return None}
+
+		// let p=self.data[0].clone();
+		// for i in 0..self.size-1{
+		// 	self.data[i]=self.data[i+1].clone();
+		// }
+		// Some(p)
+		self.size-=1;
+		self.data.pop()
 	}
 	fn peek(&self) -> Option<&T> {
 		if 0 == self.size {
@@ -102,6 +111,30 @@ impl<'a, T> Iterator for IterMut<'a, T> {
 fn bracket_match(bracket: &str) -> bool
 {
 	//TODO
+	let mut stack=Stack::new();
+	for i in bracket.chars(){
+		
+		if i=='('||i=='{'||i=='['{
+			stack.push(i);
+		}else if i==')'||i=='}'||i==']'{
+			let temp=stack.pop();
+			match temp{
+				None=>{return false},
+				Some(t)=>{
+				if t=='('{if i==')'{}else{return false}}
+				if t=='{'{if i=='}'{}else{return false}}
+				if t=='['{if i==']'{}else{return false}}
+
+				}
+			}
+			
+
+		}
+		
+		
+		
+	}
+	if !stack.data.is_empty(){return false}
 	true
 }
 
