@@ -2,7 +2,7 @@
 	double linked list reverse
 	This problem requires you to reverse a doubly linked list
 */
-// I AM NOT DONE
+
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
@@ -31,13 +31,13 @@ struct LinkedList<T> {
     end: Option<NonNull<Node<T>>>,
 }
 
-impl<T> Default for LinkedList<T> {
+impl<T:Clone> Default for LinkedList<T> {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T> LinkedList<T> {
+impl<T:Clone>LinkedList<T> {
     pub fn new() -> Self {
         Self {
             length: 0,
@@ -74,6 +74,56 @@ impl<T> LinkedList<T> {
     }
 	pub fn reverse(&mut self){
 		// TODO
+        let mut s:Vec<&T>=vec![];
+        // let mut a1:Option<T>=[None;self.length];
+        // match self.end{
+        //     None=>{},
+        //     Some(end)=>{
+        //         unsafe{let mut a=&mut (*end.as_ptr());
+        //                 let mut b=&a.prev;
+        //                 if *b==None{return;}
+        //                 a.next=*b;
+        //                 a.prev=None;
+        //                 a=&mut (*b.unwrap().as_ptr());
+        //                 loop{
+        //                     println!("1");
+        //                     let mut t1=&mut (*b.unwrap().as_ptr()).prev;
+        //                     if *t1==None{return;}
+        //                     a=&mut (*t1.unwrap().as_ptr()); 
+        //                     let mut t2=&mut (*b.unwrap().as_ptr());
+        //                     t2.prev=t2.next;
+                            
+        //                     t2.next=*t1;
+        //                     b=t1;
+        //                 }
+
+
+        //         }
+                
+        //     }
+        // }
+        match self.end{
+            None=>{},
+            Some(end)=>{
+                unsafe{
+                let mut e=&(*end.as_ptr());
+                for i in 0..self.length{
+                    s.push(&e.val);
+                    if e.prev!=None{
+                    e=&(*e.prev.unwrap().as_ptr());}
+                }
+            
+                let mut temp= LinkedList::<T>::new();
+                for i in 0..s.len(){
+                    let mut t=s[i].clone();
+                    temp.add(t);
+                }
+                *self=temp;
+            }
+        }
+        }
+
+
 	}
 }
 
