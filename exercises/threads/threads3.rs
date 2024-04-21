@@ -11,7 +11,7 @@ use std::thread;
 use std::time::Duration;
 
 struct Queue {
-    length: u32,
+    length: u32, 
     first_half: Vec<u32>,
     second_half: Vec<u32>,
 }
