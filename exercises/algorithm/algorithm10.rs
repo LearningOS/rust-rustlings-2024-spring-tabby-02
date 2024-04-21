@@ -55,7 +55,6 @@ pub trait Graph {
 		true
     }
     fn add_edge(&mut self, edge: (&str, &str, i32)) {
-        
         //TODO
     }
     fn contains(&self, node: &str) -> bool {
